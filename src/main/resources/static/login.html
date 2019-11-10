@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form>
+        <table align="center">
+            <tr>
+                <td>用户名：</td>
+                <td><input id="name" type="text"></td>
+            </tr>
+            <tr>
+                <td>密码：</td>
+                <td><input id="pass" type="password"></td>
+            </tr>
+            <tr>
+                <td><input type="submit"></td>
+            </tr>
+        </table>
+    </form>
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+    window.onload=function () {
+        $.get("/login",function (result) {
+            if(result.code === 1 || result.code === 2){
+                window.location = "index.html";
+                console.log(result.data);
+            }
+        })
+    }
+</script>
+</body>
+</html>

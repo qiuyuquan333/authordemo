@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form>
+        <h2 align="center">你的应用未进行授权，联系客服人员!</h2>
+        <table align="center">
+            <tr>
+                <td><label>申请码：</label></td>
+                <td><textarea id="application-code" rows="10" cols="30"></textarea></td>
+            </tr>
+            <tr>
+                <td><label>注册码：</label></td>
+                <td><textarea id="register-code" rows="10" cols="30"></textarea></td>
+            </tr>
+            <tr><td><input type="button" value="验证注册码" onclick="register()"></td></tr>
+
+        </table>
+    </form>
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+    window.onload = function () {
+        $.get("/generate",function (result) {
+            var data = result.data;
+            $("#application-code").val(data);
+        })
+    }
+
+    function register() {
+        var code = $("#register-code").val();
+        $.get("/register?code="+code,function (result) {
+            if(result.code === 0){
+                window.location = "login.html";
+            }else if(result.code === 1){
+                alert(result.msg);
+                return false;
+            }else if(result.code === 2){
+                alert(result.msg);
+                return false;
+            }
+        })
+    }
+
+</script>
+</body>
+</html>
